@@ -32,22 +32,72 @@ new Promise(loadUser)
 
 fetch('./user.json')
     .then(response => response.json())
-    .then( appendUsersToList )
+    .then(appendUsersToList)
     .catch(console.error);
-
-
 
 
 function appendUsersToList(users) {
 
+
+    const usersListElem = document.getElementById('usersList');
+
+    users.forEach(
+        user => {
+            usersListElem.appendChild(createUsersList(user))
+        }
+    )
+
 }
 
 
+function createUsersList(user) {
+
+    const userListItem = createUserListItem(user);
+    userListItem.appendChild(createUserPictureContainer(user));
+    userListItem.appendChild(createUserFullName(user));
+
+    return userListItem;
+
+}
 
 
+function createUserListItem(user) {
+
+    const userListItem = document.createElement("li");
+    userListItem.setAttribute('id', user.id);
+    userListItem.classList.add('userListItem');
+
+    return userListItem;
+
+}
 
 
+function createUserPictureContainer(user) {
 
+    const createUser = document.createElement('div');
+    createUser.classList.add("profilePictureContainer");
+    createUser.append(createUserPicture(user));
+    return createUser;
+}
+
+function createUserPicture(user) {
+
+    const createUserPicture = document.createElement('img');
+    createUserPicture.setAttribute('src', user.profilePictureSrc);
+    return createUserPicture;
+}
+
+
+function createUserFullName({name, surname}) {
+
+    const usersFullName = document.createElement('h3');
+    usersFullName.classList.add('userFullName');
+    usersFullName.innerText = `${name} ${surname}`;
+
+
+    return usersFullName;
+
+}
 
 
 
