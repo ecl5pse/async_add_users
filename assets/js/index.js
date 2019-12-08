@@ -20,7 +20,6 @@
 }
 
 
-
 new Promise(loadUser)
     .then(data => {
         console.log(data);
@@ -67,6 +66,17 @@ function createUserListItem(user) {
     userListItem.setAttribute('id', user.id);
     userListItem.classList.add('userListItem');
 
+    userListItem.onclick = function () {
+
+        if (user.id < 2) {
+            userListItem.style.backgroundColor = 'red';
+        } else {
+            userListItem.style.backgroundColor = 'green';
+        }
+
+    };
+
+    userListItem.addEventListener('click',userListItem);
     return userListItem;
 
 }
@@ -98,15 +108,6 @@ function createUserFullName({name, surname}) {
     return usersFullName;
 
 }
-
-
-
-
-
-
-
-
-
 
 
 
